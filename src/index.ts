@@ -184,9 +184,9 @@ class Account {
         this._balance += amount;
     }
 
-    private calculateTax(taxRate: number): number{
-        return this._balance * taxRate;
-    }
+    // private calculateTax(taxRate: number): number{
+    //     return this._balance * taxRate;
+    // }
 
 
     get balance(): number{
@@ -204,7 +204,7 @@ class Account {
 let account = new Account(1, 'Steve', 1000);
 
 account.deposite(2000);
-console.log(account.balance());
+// console.log(account.balance());
 console.log(account instanceof Account);
 
 class SeatAssignment {
@@ -263,3 +263,60 @@ class Student extends Person{
 }
 
 let student = new Student(1, 'Steve', 'Jobs');
+
+//polymorphism
+class Teacher extends Person {
+    override get fullName() {
+        return 'Professor' + super.fullName.toUpperCase();
+    }
+}
+
+class Principal extends Person {
+    override get fullName() {
+        return 'Principle' + super.fullName.toUpperCase();
+    }
+}
+
+
+printNames([
+    // new Person('Steve', 'Jobs'),
+    new Student(1, 'Bill', 'Gates'),
+    new Teacher('Steve', 'Jobs'),
+    new Principal('Steve', 'Jobs')
+]);
+
+
+function printNames(people: Person[]){
+    for(let person of people){
+        console.log(person.fullName);
+    }
+}
+
+abstract class Shape {
+    constructor(public color: string){
+
+    }
+    abstract render(): void;
+}
+
+class Circle extends Shape {
+    constructor(color: string, public radius: number){
+        super(color);
+    }
+
+    override render(): void{ 
+        console.log('rendering circle');
+    }
+}
+
+// let shape = new Shape('red');
+// shape.render();
+ interface Calander {
+    name: string;
+    addEvent(): void;
+    removeEvent(): void;
+ }
+
+ interface CloudCalander extends Calander{
+        sync(): void;
+    }
